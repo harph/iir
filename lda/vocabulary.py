@@ -65,7 +65,9 @@ class Vocabulary:
             id = self.term_to_id(term)
             if id != None:
                 list.append(id)
-                words[id] = 1
+                if not words.has_key(id):
+                    words[id] = 1
+                    self.docfreq[id] += 1
         if "close" in dir(doc): doc.close()
         for id in words: self.docfreq[id] += 1
         return list
